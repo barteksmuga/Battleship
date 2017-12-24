@@ -15,74 +15,156 @@
 #include <iostream>
 #include <iomanip>
 
+#define AREA_SIZE 12
 #define BOARD_SIZE 10
 
 class Board{
 public:
+    Board();
     Field &operator [](Point&);
     void displayBoard();
     void setShipOnBoard(Ship*&);
+    bool checkAroundShip(Ship*&);
+    bool checkField(Ship*&);
 private:
-    Field board[BOARD_SIZE][BOARD_SIZE];
+    Field board[AREA_SIZE][AREA_SIZE];
 };
+Board::Board(){
+    for(int i=0; i<AREA_SIZE; i++)
+        for(int j=0; j<AREA_SIZE; j++)
+            board[i][j].setBoolValueFalse();
+}
 Field & Board::operator [](Point &point){
     return board[point.x][point.y];
 }
 void Board::displayBoard(){
-    const int cwidth = 3;
-    int y=1;
-    for(int x=0; x<11; x++){
-        std::cout << std::setw(cwidth) << x << "|";
+    const int CWIDTH = 3;
+    int y=0;
+    std::cout << std::setw(CWIDTH) << "   |";
+    for(int x=0; x<10; x++){
+        std::cout << std::setw(CWIDTH) << x << "|";
     }
     
     std::cout << std::endl;
     std::cout << " ";
     for(int k=0; k<=BOARD_SIZE; k++)
-        std::cout << std::setw(cwidth) << "----";
+        std::cout << std::setw(CWIDTH) << "----";
     
     std::cout << std::endl;
     for(int i=0; i<BOARD_SIZE; i++){
-        std::cout << std::setw(cwidth) << y << "|";
+        std::cout << std::setw(CWIDTH) << y << "|";
         for(int j=0; j<BOARD_SIZE; j++){
             if(board[i][j].isShip()){
-                std::cout << std::setw(cwidth) << " 0 |";
+                std::cout << std::setw(CWIDTH) << " 0 |";
             } else {
-                std::cout << std::setw(cwidth) << " - |";
+                std::cout << std::setw(CWIDTH) << "   |";
             }
         }
         y++;
         std::cout << std::endl;
         std::cout << " ";
         for(int k=0; k<=BOARD_SIZE; k++)
-            std::cout << std::setw(cwidth) << "----";
+            std::cout << std::setw(CWIDTH) << "----";
         std::cout << std::endl;
     }
 }
 void Board::setShipOnBoard(Ship *&ship){
     Point temporary = ship->getShipStart();
-    
+    ship->setShipOrientation();
+    bool state;
     switch(ship->getShipOrientation()){
         case left:
-            for(int i=(temporary.y); i>(temporary.y - ship->getLength()); i--){
-                board[temporary.x][i].setShip(ship);
+            state = checkAroundShip(ship);
+            if(state){
+                std::cout << "ship touches another one\n";
+                ship->setShipStart();
+                setShipOnBoard(ship);
+            } else {
+                for(int i=(temporary.y); i>(temporary.y - ship->getLength()); i--){
+                    board[temporary.x][i].setShip(ship);
+                }
             }
             break;
         case up:
-            for(int i=temporary.x; i>(temporary.x - ship->getLength()); i--){
-                board[i][temporary.y].setShip(ship);
+            if(checkAroundShip(ship)){
+                std::cout << "ship touches another one\n";
+                ship->setShipStart();
+                setShipOnBoard(ship);
+            } else {
+                for(int i=temporary.x; i>(temporary.x - ship->getLength()); i--){
+                    board[i][temporary.y].setShip(ship);
+                }
             }
             break;
         case right:
-            for(int i=temporary.y; i<(temporary.y + ship->getLength()); i++){
-                board[temporary.x][i].setShip(ship);
+            if(checkAroundShip(ship)){
+                std::cout << "ship touches another one\n";
+                ship->setShipStart();
+                setShipOnBoard(ship);
+            } else {
+                for(int i=temporary.y; i<(temporary.y + ship->getLength()); i++){
+                    board[temporary.x][i].setShip(ship);
+                }
             }
+            
             break;
         case down:
-            for(int i=temporary.x; i<(temporary.x + ship->getLength()); i++){
-                board[i][temporary.y].setShip(ship);
+            if(checkAroundShip(ship)){
+                std::cout << "ship touches another one\n";
+                ship->setShipStart();
+                setShipOnBoard(ship);
+            } else {
+                for(int i=temporary.x; i<(temporary.x + ship->getLength()); i++){
+                    board[i][temporary.y].setShip(ship);
+                }
             }
             break;
     }
+}
+bool Board::checkAroundShip(Ship *&ship){
+    Point start_ = ship->getShipStart();
+    Point end_ = ship->getShipEnd();
+    int length_ = ship->getLength();
+    Orientation orientation_ = ship->getShipOrientation();
+    
+    if(orientation_ == left){
+        for(int i=(start_.y); i>(start_.y - length_); i--){
+            if(board[start_.x-1][i].isShip() || board[start_.x+1][i].isShip())
+                return true;
+        }
+        if(board[start_.x][start_.y+1].isShip() || board[start_.x][end_.y-1].isShip())
+                return true;
+    }
+    
+    if(orientation_ == right){
+        for(int i=(start_.y); i<(start_.y + length_); i++){
+            if(board[start_.x - 1][i].isShip() || board[start_.x + 1][i].isShip())
+                return true;
+        }
+        if(board[start_.x][(start_.y-1)].isShip() || board[start_.x][(end_.y+1)].isShip())
+                return true;
+    }
+    
+    if(orientation_ == up){
+        for(int i=(start_.x); i>(start_.x-length_); i--){
+            if(board[i][start_.y-1].isShip() || board[i][start_.y+1].isShip())
+                return true;
+        }
+        if(board[start_.x+1][start_.y].isShip() || board[end_.x-1][start_.y].isShip())
+                return true;
+    }
+    
+    if(orientation_ == down){
+        for(int i=(start_.x); i<(start_.x + length_); i++){
+            if(board[i][start_.y-1].isShip() || board[i][start_.y+1].isShip())
+                return true;
+        }
+        if(board[start_.x-1][start_.y].isShip() || board[end_.x][start_.y].isShip()){
+                return true;
+        }
+    }
+    
+    return false;
 }
 
 #endif /* BOARD_HPP */

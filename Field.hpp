@@ -25,14 +25,15 @@ public:
     void setShip(Ship*&);
     int getCoordinates(char);
     bool isShip();
+    void setBoolValueFalse();
 private:
     static int counter;
     Point coordinates;
     Ship *ship;
-    bool bship = false;
+    bool bship;
 };
 int Field::counter = 0;
-Field::Field(){++counter;ship=nullptr;}
+Field::Field(){++counter;ship=nullptr;bship=false;}
 Field::Field(Point &point): coordinates(point){++counter;ship = nullptr;}
 Field::~Field(){counter--;}
 void Field::setShip(Ship *&myShip){
@@ -48,7 +49,10 @@ int Field::getCoordinates(char sign){
 }
 
 bool Field::isShip(){return bship;}
-
+void Field::setBoolValueFalse(){
+    bship = false;
+}
+//*************************************************************************************
 std::ostream &operator <<(std::ostream &output, Field &field){
     output << "Field " << field.getCounter() << ":\n"
     << "Coordinates(" << field.coordinates.x << "," << field.coordinates.y << ")\n";

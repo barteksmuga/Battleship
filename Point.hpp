@@ -10,12 +10,15 @@
 #define POINT_HPP
 
 #include <iostream>
+class Point;
+std::istream &operator >>(std::istream&,Point&);
 
 class Point{
 public:
     int x,y;
+    friend std::istream &operator >>(std::istream&,Point&);
     Point(int X, int Y): x(X), y(Y){}
-    Point(): x(0), y(0){}
+    Point(){}
     Point &operator --();
     Point &operator --(int);
 };
@@ -28,5 +31,10 @@ Point & Point::operator --(int){
     x -= 1;
     y -= 1;
     return *this;
+}
+//************************************************************
+std::istream &operator >>(std::istream &input, Point &point){
+    input >> point.x >> point.y;
+    return input;
 }
 #endif /* POINT_HPP */
