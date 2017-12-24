@@ -29,6 +29,8 @@
 		988E0A511FE406F6002E4A1B /* Point.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Point.hpp; sourceTree = "<group>"; };
 		988E0A541FE4077E002E4A1B /* Ship.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Ship.hpp; sourceTree = "<group>"; };
 		988E0A571FE40CE2002E4A1B /* Field.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Field.hpp; sourceTree = "<group>"; };
+		98D0962E1FEF1ADF004C2BA7 /* Player.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
+		98D096311FEF29D6004C2BA7 /* PlayerHuman.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PlayerHuman.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,8 @@
 			children = (
 				988E0A491FE406B9002E4A1B /* main.cpp */,
 				988539851FE7464700F5BA8F /* Board.hpp */,
+				98D096311FEF29D6004C2BA7 /* PlayerHuman.hpp */,
+				98D0962E1FEF1ADF004C2BA7 /* Player.hpp */,
 				988E0A571FE40CE2002E4A1B /* Field.hpp */,
 				988E0A541FE4077E002E4A1B /* Ship.hpp */,
 				988E0A511FE406F6002E4A1B /* Point.hpp */,
