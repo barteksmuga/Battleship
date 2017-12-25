@@ -14,6 +14,8 @@
 #include "Point.hpp"
 #include <iostream>
 #include <iomanip>
+#include <ncurses.h>
+#include <curses.h>
 
 #define AREA_SIZE 12
 #define BOARD_SIZE 10
@@ -22,8 +24,10 @@ class Board{
 public:
     Board();
     Field &operator [](Point&);
-    void displayBoard();
+    void displayShipsOnBoard();
+    void displayShotsOnBoard();
     void setShipOnBoard(Ship*&);
+    void takeAShotOnBoard(Point&);
     bool checkAroundShip(Ship*&);
     bool checkField(Ship*&);
 private:
@@ -37,13 +41,13 @@ Board::Board(){
 Field & Board::operator [](Point &point){
     return board[point.x][point.y];
 }
-void Board::displayBoard(){
+void Board::displayShipsOnBoard(){
     const int CWIDTH = 3;
     int y=0;
     std::cout << std::setw(CWIDTH) << "   |";
-    for(int x=0; x<10; x++){
+    for(int x=0; x<10; x++)
         std::cout << std::setw(CWIDTH) << x << "|";
-    }
+    
     
     std::cout << std::endl;
     std::cout << " ";
@@ -65,8 +69,46 @@ void Board::displayBoard(){
         std::cout << " ";
         for(int k=0; k<=BOARD_SIZE; k++)
             std::cout << std::setw(CWIDTH) << "----";
+        
         std::cout << std::endl;
     }
+}
+void Board::displayShotsOnBoard(){
+    int line,column;
+    initscr();
+    getmaxyx(stdscr, line, column);
+    move(line/2, column/2);
+    
+    const int CWIDTH = 3;
+    int y=0;
+    std::cout << std::setw(CWIDTH) << "   |";
+    for(int x=0; x<10; x++){
+        std::cout << std::setw(CWIDTH) << x << "|";
+    }
+    
+    std::cout << std::endl;
+    std::cout << " ";
+    for(int k=0; k<=BOARD_SIZE; k++)
+        std::cout << std::setw(CWIDTH) << "----";
+    
+    std::cout << std::endl;
+    for(int i=0; i<BOARD_SIZE; i++){
+        std::cout << std::setw(CWIDTH) << y << "|";
+        for(int j=0; j<BOARD_SIZE; j++){
+            if(board[i][j].isShot()){
+                std::cout << std::setw(CWIDTH) << " x |";
+            } else {
+                std::cout << std::setw(CWIDTH) << "   |";
+            }
+        }
+        y++;
+        std::cout << std::endl;
+        std::cout << " ";
+        for(int k=0; k<=BOARD_SIZE; k++)
+            std::cout << std::setw(CWIDTH) << "----";
+        std::cout << std::endl;
+    }
+    endwin();
 }
 void Board::setShipOnBoard(Ship *&ship){
     Point temporary = ship->getShipStart();
@@ -166,7 +208,9 @@ bool Board::checkAroundShip(Ship *&ship){
     
     return false;
 }
-
+void Board::takeAShotOnBoard(Point &point){
+    board[point.x][point.y].takeShot();
+}
 #endif /* BOARD_HPP */
 
 

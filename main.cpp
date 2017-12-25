@@ -16,9 +16,13 @@
 #define EXIT_SUCCES 0
 
 int main(){
+    {
     PlayerHuman player;
     
     player.setShips();
+        player.takeAShot();
+    }
+    std::cout << "SHIPS: " << Ship::getCounter() << std::endl;
     
     return EXIT_SUCCESS;
 }

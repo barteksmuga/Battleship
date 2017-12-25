@@ -17,6 +17,7 @@ public:
     Player();
     virtual ~Player() = 0;
     virtual void setShips() = 0;
+    virtual void takeAShot() = 0;
 protected:
     std::string name;
 };

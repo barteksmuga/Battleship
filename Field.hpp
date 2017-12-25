@@ -21,26 +21,38 @@ public:
     Field();
     ~Field();
     friend std::ostream &operator <<(std::ostream&,Field&);
-    static int getCounter(){return counter;}
     void setShip(Ship*&);
+    void takeShot();
+    void setBoolValueFalse();
+    static int getCounter(){return counter;}
     int getCoordinates(char);
     bool isShip();
-    void setBoolValueFalse();
+    bool isShot();
 private:
     static int counter;
     Point coordinates;
     Ship *ship;
     bool bship;
+    bool shot;
 };
 int Field::counter = 0;
-Field::Field(){++counter;ship=nullptr;bship=false;}
+Field::Field(){
+    ++counter;
+    ship = nullptr;
+    bship = false;
+    shot = false;
+}
 Field::Field(Point &point): coordinates(point){++counter;ship = nullptr;}
 Field::~Field(){counter--;}
 void Field::setShip(Ship *&myShip){
     ship = myShip;
     bship = true;
 }
-
+void Field::takeShot(){shot = true;}
+void Field::setBoolValueFalse(){
+    bship = false;
+    shot = false;
+}
 int Field::getCoordinates(char sign){
     if(sign == 'x' || sign == 'X')
         return Field::coordinates.x;
@@ -49,9 +61,8 @@ int Field::getCoordinates(char sign){
 }
 
 bool Field::isShip(){return bship;}
-void Field::setBoolValueFalse(){
-    bship = false;
-}
+bool Field::isShot(){return shot;}
+
 //*************************************************************************************
 std::ostream &operator <<(std::ostream &output, Field &field){
     output << "Field " << field.getCounter() << ":\n"
