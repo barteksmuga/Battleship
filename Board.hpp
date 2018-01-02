@@ -14,8 +14,6 @@
 #include "Point.hpp"
 #include <iostream>
 #include <iomanip>
-#include <ncurses.h>
-#include <curses.h>
 
 #define AREA_SIZE 12
 #define BOARD_SIZE 10
@@ -29,7 +27,8 @@ public:
     void setShipOnBoard(Ship*&);
     void takeAShotOnBoard(Point&);
     bool checkAroundShip(Ship*&);
-    bool checkField(Ship*&);
+    bool isShipOnField(Point&);
+    bool correctShot(Point&);
 private:
     Field board[AREA_SIZE][AREA_SIZE];
 };
@@ -74,11 +73,7 @@ void Board::displayShipsOnBoard(){
     }
 }
 void Board::displayShotsOnBoard(){
-    int line,column;
-    initscr();
-    getmaxyx(stdscr, line, column);
-    move(line/2, column/2);
-    
+    std::cout << "\n\n\tSHOTS BOARD: \n";
     const int CWIDTH = 3;
     int y=0;
     std::cout << std::setw(CWIDTH) << "   |";
@@ -96,7 +91,10 @@ void Board::displayShotsOnBoard(){
         std::cout << std::setw(CWIDTH) << y << "|";
         for(int j=0; j<BOARD_SIZE; j++){
             if(board[i][j].isShot()){
-                std::cout << std::setw(CWIDTH) << " x |";
+                if(board[i][j].isShip())
+                    std::cout << std::setw(CWIDTH) << " x |";
+                else
+                    std::cout << std::setw(CWIDTH) << " o |";
             } else {
                 std::cout << std::setw(CWIDTH) << "   |";
             }
@@ -108,7 +106,6 @@ void Board::displayShotsOnBoard(){
             std::cout << std::setw(CWIDTH) << "----";
         std::cout << std::endl;
     }
-    endwin();
 }
 void Board::setShipOnBoard(Ship *&ship){
     Point temporary = ship->getShipStart();
@@ -211,6 +208,12 @@ bool Board::checkAroundShip(Ship *&ship){
 void Board::takeAShotOnBoard(Point &point){
     board[point.x][point.y].takeShot();
 }
+bool Board::isShipOnField(Point &shot){
+    if(board[shot.x][shot.y].isShip())
+        return true;
+    else
+        return false;
+        
+}
+
 #endif /* BOARD_HPP */
-
-

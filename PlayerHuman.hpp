@@ -21,8 +21,9 @@ public:
     PlayerHuman();
     ~PlayerHuman();
     void setShips();
-    void takeAShot();
+    Point takeAShot();
 private:
+    Board playerBoard;
     const int ONE_MASTED_SHIPS;
     const int TWO_MASTED_SHIPS;
     const int THREE_MASTED_SHIPS;
@@ -32,7 +33,7 @@ private:
     Ship **threeMastedShips;
     Ship **fourMastedShips;
 };
-PlayerHuman::PlayerHuman(): Player(), ONE_MASTED_SHIPS(0),TWO_MASTED_SHIPS(0),THREE_MASTED_SHIPS(0),FOUR_MASTED_SHIPS(2){}
+PlayerHuman::PlayerHuman(): Player(), ONE_MASTED_SHIPS(0),TWO_MASTED_SHIPS(0),THREE_MASTED_SHIPS(0),FOUR_MASTED_SHIPS(1){}
 PlayerHuman::~PlayerHuman(){
     for(int i=0; i<ONE_MASTED_SHIPS; i++)
         delete oneMastedShips[i];
@@ -52,48 +53,57 @@ PlayerHuman::~PlayerHuman(){
     
 }
 void PlayerHuman::setShips(){
-    Board shipsBoard;
     
     oneMastedShips = new Ship *[ONE_MASTED_SHIPS];
     for(int i=0; i<ONE_MASTED_SHIPS; i++){
-        shipsBoard.displayShipsOnBoard();
+        playerBoard.displayShipsOnBoard();
         oneMastedShips[i] = new Ship(1);
-        shipsBoard.setShipOnBoard(oneMastedShips[i]);
+        playerBoard.setShipOnBoard(oneMastedShips[i]);
         std::system("clear");
     }
     
     twoMastedShips = new Ship *[TWO_MASTED_SHIPS];
     for(int i=0; i<TWO_MASTED_SHIPS; i++){
-        shipsBoard.displayShipsOnBoard();
+        playerBoard.displayShipsOnBoard();
         twoMastedShips[i] = new Ship(2);
-        shipsBoard.setShipOnBoard(twoMastedShips[i]);
+        playerBoard.setShipOnBoard(twoMastedShips[i]);
         std::system("clear");
     }
     
     threeMastedShips = new Ship *[THREE_MASTED_SHIPS];
     for(int i=0; i<THREE_MASTED_SHIPS; i++){
-        shipsBoard.displayShipsOnBoard();
+        playerBoard.displayShipsOnBoard();
         threeMastedShips[i] = new Ship(3);
-        shipsBoard.setShipOnBoard(threeMastedShips[i]);
+        playerBoard.setShipOnBoard(threeMastedShips[i]);
         std::system("clear");
     }
     
     fourMastedShips = new Ship *[FOUR_MASTED_SHIPS];
     for(int i=0; i<FOUR_MASTED_SHIPS; i++){
-        shipsBoard.displayShipsOnBoard();
+        playerBoard.displayShipsOnBoard();
         fourMastedShips[i] = new Ship(4);
-        shipsBoard.setShipOnBoard(fourMastedShips[i]);
+        playerBoard.setShipOnBoard(fourMastedShips[i]);
         std::system("clear");
     }
-    shipsBoard.displayShipsOnBoard();
+    playerBoard.displayShipsOnBoard();
 }
-void PlayerHuman::takeAShot(){
-    Board shotsBoard;
+Point PlayerHuman::takeAShot(){
+    bool flag = true;
     Point shot;
-    std::cout << "Where do you wanna take a shot: ";
-    std::cin >> shot;
-    shotsBoard.takeAShotOnBoard(shot);
-    shotsBoard.displayShotsOnBoard();
+    while(flag){
+        playerBoard.displayShipsOnBoard();
+        gameBoard.displayShotsOnBoard();
+        std::cout << "Where do you wanna take a shot: ";
+        std::cin >> shot;
+        gameBoard.takeAShotOnBoard(shot);
+        if(correctShot(shot))
+            std::cout << "You've already hit a ship. Go ahead!\n";
+        else
+            flag = false;
+    }
     std::system("clear");
+    playerBoard.displayShipsOnBoard();
+    gameBoard.displayShotsOnBoard();
+    return shot;
 }
 #endif /* PlayerHuman_hpp */

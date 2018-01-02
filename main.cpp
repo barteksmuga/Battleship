@@ -19,10 +19,11 @@ int main(){
     {
     PlayerHuman player;
     
-    player.setShips();
+        player.setShips();
         player.takeAShot();
+
     }
-    std::cout << "SHIPS: " << Ship::getCounter() << std::endl;
+//    std::cout << "SHIPS: " << Ship::getCounter() << std::endl;
     
     return EXIT_SUCCESS;
 }

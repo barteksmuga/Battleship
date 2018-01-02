@@ -28,6 +28,7 @@ public:
     int getCoordinates(char);
     bool isShip();
     bool isShot();
+    bool correctShot(Point&);
 private:
     static int counter;
     Point coordinates;
