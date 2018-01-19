@@ -6,64 +6,65 @@
 //  Copyright © 2017 Bartłomiej Smuga. All rights reserved.
 //
 
-#ifndef PLAYER_HPP
-#define PLAYER_HPP
+#ifndef Player_hpp
+#define Player_hpp
 
-#include <cmath>
-#include <string>
 #include <iostream>
+#include "Ship.hpp"
 #include "Board.hpp"
+const int ONE_MASTED_SHIPS = 0;
+const int TWO_MASTED_SHIPS = 0;
+const int THREE_MASTED_SHIPS = 2;
+const int FOUR_MASTED_SHIPS = 1;
 
 class Player{
 public:
+    friend class Game;
     Player();
-    virtual ~Player() = 0;
-    virtual void setShips() = 0;
-    virtual Point takeAShot() = 0;
-    virtual bool correctShot(Point&);
-    void surprisePrint();
+    virtual ~Player();
+    virtual void createShips()=0;
+    virtual Point takeShot()=0;
+    virtual bool correctShot(Point&)=0;
+    virtual Point createStart()=0;
+    virtual Direction createDirection()=0;
+    virtual void hitsIncrement()=0;
+    virtual int getHitsCounter()=0;
+    virtual Point shotPointsGenerator_ifWasHit(Point&)=0;
+    virtual std::string getName()=0;
 protected:
-    std::string name;
-    Board gameBoard;
+    Board *board[2];
+    Ship *oneMastedShips[ONE_MASTED_SHIPS];
+    Ship *twoMastedShips[TWO_MASTED_SHIPS];
+    Ship *threeMastedShips[THREE_MASTED_SHIPS];
+    Ship *fourMastedShips[FOUR_MASTED_SHIPS];
+    static int maxHits;
 };
+int Player::maxHits = 0;
 Player::Player(){
-    std::cout << "Insert your name: ";
-    std::cin >> name;
-    if(name == "Monika" || name == "monika" || name == "Monia" ||name == "monia")
-        surprisePrint();
-    else
-        std::cout << "Hello " << name << ", let's play a battleship!\n";
-}
-Player::~Player(){}
-bool Player::correctShot(Point &shot){
-    if(gameBoard.isShipOnField(shot))
-        return true;
-    else
-        return false;        
-}
-void Player::surprisePrint(){
-    double x,y;
-    double size=10;
-    for (x=0; x<size; x++){
-        for (y=0;y<=4*size;y++){
-            double dist1 = sqrt( pow(x-size,2) + pow(y-size,2) );
-            double dist2 = sqrt( pow(x-size,2) + pow(y-3*size,2) );
-            
-            if (dist1 < size + 0.5 || dist2 < size + 0.5 )
-                std::cout<<"V";
-            else
-                std::cout<<" ";
-        }
-        std::cout<<std::endl;
+    for(int i=0;i<2;i++)
+        board[i] = new Board;
+    for(int i=0; i<ONE_MASTED_SHIPS; i++){
+        oneMastedShips[i] = new Ship(1);
+        maxHits += 1;
     }
-    for(x=1; x<2*size; x++){
-        for(y=0;y<x;y++)
-            std::cout<<" ";
-        
-        for (y=0; y<(4*size+1-2*x); y++)
-            std::cout<<"V";
-        
-        std::cout<<std::endl;
+    for(int i=0; i<TWO_MASTED_SHIPS; i++){
+        twoMastedShips[i] = new Ship(2);
+        maxHits += 2;
+    }
+    for(int i=0; i<THREE_MASTED_SHIPS; i++){
+        threeMastedShips[i] = new Ship(3);
+        maxHits += 3;
+    }
+    for(int i=0; i<FOUR_MASTED_SHIPS; i++){
+        fourMastedShips[i] = new Ship(4);
+        maxHits += 4;
     }
 }
-#endif /* PLAYER_HPP */
+Player::~Player(){
+    delete oneMastedShips[ONE_MASTED_SHIPS];
+    delete twoMastedShips[TWO_MASTED_SHIPS];
+    delete threeMastedShips[THREE_MASTED_SHIPS];
+        delete fourMastedShips[FOUR_MASTED_SHIPS];// wtf?! Krzys pomusz..
+    delete board[2];
+}
+#endif /* Player_hpp */

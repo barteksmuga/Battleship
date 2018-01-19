@@ -6,77 +6,46 @@
 //  Copyright © 2017 Bartłomiej Smuga. All rights reserved.
 //
 
-#ifndef FIELD_HPP
-#define FIELD_HPP
+#ifndef Field_hpp
+#define Field_hpp
 
-#include "Ship.hpp"
-#include "Point.hpp"
 #include <iostream>
-class Field;
-std::ostream &operator<<(std::ostream&,Field&);
+#include "Point.hpp"
+#include "Ship.hpp"
 
 class Field{
 public:
-    Field(Point&);
     Field();
-    ~Field();
-    friend std::ostream &operator <<(std::ostream&,Field&);
-    void setShip(Ship*&);
-    void takeShot();
-    void setBoolValueFalse();
-    static int getCounter(){return counter;}
-    int getCoordinates(char);
     bool isShip();
     bool isShot();
-    bool correctShot(Point&);
+    void setShip(Ship*&);
+    void setShot();
+    void setValue();
 private:
-    static int counter;
-    Point coordinates;
     Ship *ship;
-    bool bship;
+    bool sship;
     bool shot;
 };
-int Field::counter = 0;
 Field::Field(){
-    ++counter;
     ship = nullptr;
-    bship = false;
+    sship = false;
     shot = false;
 }
-Field::Field(Point &point): coordinates(point){++counter;ship = nullptr;}
-Field::~Field(){counter--;}
-void Field::setShip(Ship *&myShip){
-    ship = myShip;
-    bship = true;
+bool Field::isShip(){
+    return sship;
 }
-void Field::takeShot(){shot = true;}
-void Field::setBoolValueFalse(){
-    bship = false;
+bool Field::isShot(){
+    return shot;
+}
+void Field::setShip(Ship *&newShip){
+    ship = newShip;
+    sship = true;
+}
+void Field::setShot(){
+    shot = true;
+}
+void Field::setValue(){
+    sship = false;
     shot = false;
 }
-int Field::getCoordinates(char sign){
-    if(sign == 'x' || sign == 'X')
-        return Field::coordinates.x;
-    else
-        return Field::coordinates.y;
-}
-
-bool Field::isShip(){return bship;}
-bool Field::isShot(){return shot;}
-
-//*************************************************************************************
-std::ostream &operator <<(std::ostream &output, Field &field){
-    output << "Field " << field.getCounter() << ":\n"
-    << "Coordinates(" << field.coordinates.x << "," << field.coordinates.y << ")\n";
-    if(field.ship){
-        output << "Ship: ";
-        field.ship->displayShip();
-    } else {
-        output << "No ship on field\n";
-    }
-    return output;
-}
-
-
-#endif /* FIELD_HPP */
-
+#endif /* Field_hpp */
