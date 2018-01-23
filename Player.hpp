@@ -16,7 +16,7 @@ const int ONE_MASTED_SHIPS = 4;
 const int TWO_MASTED_SHIPS = 3;
 const int THREE_MASTED_SHIPS = 2;
 const int FOUR_MASTED_SHIPS = 1;
-
+ 
 class Player{
 public:
     friend class Game;

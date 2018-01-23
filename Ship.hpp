@@ -13,7 +13,7 @@
 #include <iostream>
 #include "Point.hpp"
 #include "Direction.hpp"
-
+ 
 class Ship{
 public:
     Ship(int);

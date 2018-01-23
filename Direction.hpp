@@ -9,7 +9,7 @@
 
 #ifndef Direction_hpp
 #define Direction_hpp
-
+ 
 #include <iostream>
 
 enum Direction {left = 1,up = 2,right = 3,down = 4};

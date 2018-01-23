@@ -8,7 +8,7 @@
 
 #ifndef Field_hpp
 #define Field_hpp
-
+ 
 #include <iostream>
 #include "Point.hpp"
 #include "Ship.hpp"

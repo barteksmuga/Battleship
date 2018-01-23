@@ -8,7 +8,7 @@
 
 #ifndef Game_hpp
 #define Game_hpp
-
+ 
 #include "PlayerAI.hpp"
 #include "PlayerHuman.hpp"
 #include "Player.hpp"
