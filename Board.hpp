@@ -7,7 +7,7 @@
 //
 #ifndef Board_hpp
 #define Board_hpp
- 
+  
 #include <iostream>
 #include <iomanip>
 #include "Point.hpp"
@@ -197,4 +197,5 @@ void Board::displayShotsOnBoard(){
         std::cout << std::endl;
     }
 }
+
 #endif /* Board_hpp */

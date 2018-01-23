@@ -13,7 +13,7 @@
 #include "PlayerHuman.hpp"
 #include "Player.hpp"
 #include <iostream>
-
+ 
 class Game{
 public:
     Game();
@@ -92,5 +92,6 @@ void Game::run(){
     } while(player_0_hits < maxHits && player_1_hits < maxHits);
     winner();
 }
+
 #endif /* Game_hpp */
 

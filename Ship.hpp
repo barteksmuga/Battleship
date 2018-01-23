@@ -13,7 +13,7 @@
 #include <iostream>
 #include "Point.hpp"
 #include "Direction.hpp"
- 
+  
 class Ship{
 public:
     Ship(int);
@@ -51,4 +51,5 @@ void Ship::setDirection(Direction &direct){
 Point Ship::getStart(){return start;}
 int Ship::getLength(){return length;}
 Direction Ship::getDirection(){return direction;}
+
 #endif /* Ship_hpp */

@@ -16,7 +16,7 @@ const int ONE_MASTED_SHIPS = 4;
 const int TWO_MASTED_SHIPS = 3;
 const int THREE_MASTED_SHIPS = 2;
 const int FOUR_MASTED_SHIPS = 1;
- 
+  
 class Player{
 public:
     friend class Game;
@@ -64,7 +64,8 @@ Player::~Player(){
     delete oneMastedShips[ONE_MASTED_SHIPS];
     delete twoMastedShips[TWO_MASTED_SHIPS];
     delete threeMastedShips[THREE_MASTED_SHIPS];
-        delete fourMastedShips[FOUR_MASTED_SHIPS];// wtf?! Krzys pomusz..
+    delete fourMastedShips[FOUR_MASTED_SHIPS];
     delete board[2];
 }
+
 #endif /* Player_hpp */

@@ -14,11 +14,12 @@
 #include "PlayerHuman.hpp"
 #include "PlayerAI.hpp"
 #include "Game.hpp"
-
+ 
 #define EXIT_SUCCESS 0
 
 int main() {
-    { 
+
+    {
         Game game;
         game.run();
     }

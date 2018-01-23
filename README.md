@@ -9,10 +9,11 @@
   
   Firstly you need a C++ compiler for your OS.
   You can download proper version from: https://gcc.gnu.org/install/index.html
-  
+   
   Installing:
   
   Download files and run only executable file called: "start".
   
   Created by Bartłomiej Smuga.
   Copyright © 2017 Bartłomiej Smuga. All rights reserved.
+

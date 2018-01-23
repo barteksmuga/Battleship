@@ -13,7 +13,7 @@
 #include "Player.hpp"
 #include <iostream>
 #include <string>
- 
+  
 class PlayerHuman : public Player {
 public:
     PlayerHuman();
@@ -153,4 +153,5 @@ bool PlayerHuman::checkShipPosition(Ship *&ship){
 Point PlayerHuman::shotPointsGenerator_ifWasHit(Point &point){
     return Point(0,0);
 }
+
 #endif /* PlayerHuman_hpp */

@@ -12,7 +12,7 @@
 #include <iostream>
 #include "Point.hpp"
 #include "Ship.hpp"
-
+ 
 class Field{
 public:
     Field();
@@ -48,4 +48,5 @@ void Field::setValue(){
     sship = false;
     shot = false;
 }
+
 #endif /* Field_hpp */

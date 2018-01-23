@@ -11,7 +11,7 @@
 #define Direction_hpp
  
 #include <iostream>
-
+ 
 enum Direction {left = 1,up = 2,right = 3,down = 4};
 
 Direction setDirection(){
@@ -36,5 +36,6 @@ Direction randomDirection(int numberOfElements, int firstElement){
     direct = static_cast<Direction>(rand() % numberOfElements + firstElement);
     return direct;
 }
+
 
 #endif /* Direction_hpp */

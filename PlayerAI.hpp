@@ -12,7 +12,7 @@
 #include <iostream>
 #include <ctime>
 #include <vector>
- 
+  
 class PlayerAI : public Player {
 public:
     PlayerAI();
@@ -202,4 +202,5 @@ bool PlayerAI::checkShipPosition(Ship *&ship){
             break;
     }
 }
+
 #endif /* PlayerAI_hpp */

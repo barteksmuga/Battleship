@@ -12,7 +12,7 @@
 #include <iostream>
 class Point;
 std::istream &operator >>(std::istream&,Point&);
- 
+  
 class Point{
 public:
     Point();
@@ -34,4 +34,5 @@ bool Point::operator ==(const Point &point){
     else
         return false;
 }
+
 #endif /* Point_hpp */
