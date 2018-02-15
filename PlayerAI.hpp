@@ -14,7 +14,7 @@
 #include <ctime>
 #include <vector>
 
-bool test = true; //if test equals to true AI's ships will be displayed;
+bool test = false; //if test equals to true AI's ships will be displayed;
 
 class PlayerAI : public Player {
 public:
