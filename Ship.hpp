@@ -3,9 +3,9 @@
 //  battleship
 //
 //  Created by Bartłomiej Smuga on 15/12/2017.
-//  Copyright © 2017 Bartłomiej Smuga. All rights reserved.
+//  Copyright © 2017 Bartłomiej Smuga
+//  Released under the MIT license
 //
-
 
 #ifndef Ship_hpp
 #define Ship_hpp

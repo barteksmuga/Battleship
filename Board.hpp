@@ -3,8 +3,10 @@
 //  battleship
 //
 //  Created by Bartłomiej Smuga on 18/12/2017.
-//  Copyright © 2017 Bartłomiej Smuga. All rights reserved.
+//  Copyright © 2017 Bartłomiej Smuga
+//  Released under the MIT license
 //
+
 #ifndef Board_hpp
 #define Board_hpp
   

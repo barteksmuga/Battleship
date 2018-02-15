@@ -3,7 +3,8 @@
 //  battleship
 //
 //  Created by Bartłomiej Smuga on 07/01/2018.
-//  Copyright © 2018 Bartłomiej Smuga. All rights reserved.
+//  Copyright © 2017 Bartłomiej Smuga
+//  Released under the MIT license
 //
 
 #ifndef Game_hpp
@@ -41,13 +42,16 @@ void Game::setShips(){
 }
 void Game::startShooting(){
     std::system("clear");
+
     player[0]->board[0]->displayShipsOnBoard();
     player[1]->board[0]->displayShotsOnBoard();
     Point humansShot = player[0]->takeShot();
     player[1]->board[0]->takeAShotOnBoard(humansShot);
     std::system("clear");
+    
     player[0]->board[0]->displayShipsOnBoard();
     player[1]->board[0]->displayShotsOnBoard();
+    
     while(player[1]->correctShot(humansShot)){
         player[0]->hitsIncrement();
         humansShot = player[0]->takeShot();
@@ -60,8 +64,10 @@ void Game::startShooting(){
     Point AIsShot = player[1]->takeShot();
     player[0]->board[0]->takeAShotOnBoard(AIsShot);
     std::system("clear");
+    
     player[0]->board[0]->displayShipsOnBoard();
     player[1]->board[0]->displayShotsOnBoard();
+    
     while (player[0]->correctShot(AIsShot)){
         player[1]->hitsIncrement();
         Point AIsCorrectShot = AIsShot;
@@ -78,7 +84,7 @@ void Game::winner(){
     else
         std::cout << "Game Over, " << player[1]->getName() << "won this time. Try again\n";
     
-    std::cout << "//  Created by Bartłomiej Smuga\n//  Copyright © 2018 Bartłomiej Smuga. All rights reserved.";
+    std::cout << "//  Created by Bartłomiej Smuga\n//  MIT License\n//   Copyright © 2018 Bartłomiej Smuga.";
 }
 void Game::run(){
     

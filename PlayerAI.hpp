@@ -3,7 +3,8 @@
 //  battleship
 //
 //  Created by Bartłomiej Smuga on 05/01/2018.
-//  Copyright © 2018 Bartłomiej Smuga. All rights reserved.
+//  Copyright © 2017 Bartłomiej Smuga
+//  Released under the MIT license
 //
 
 #ifndef PlayerAI_hpp
@@ -37,7 +38,7 @@ private:
     std::vector<Point> shotPoints;
     int hitsCounter;
 };
-PlayerAI::PlayerAI() : Player(), hitsCounter(0), name("AI") {}
+PlayerAI::PlayerAI() : Player(), name("AI"), hitsCounter(0) {}
 PlayerAI::~PlayerAI(){}
 
 void PlayerAI::createShips(){
