@@ -1,16 +1,16 @@
-  #battleship
+  # battleship
   
   Easy and popular game called Battleship or Sea Battle. Before played only on paper, now avaible for your console!
   Made as university project.
   
-  ##Getting started:
+  ## Getting started:
   
-  ###Prerequisites:
+  ### Prerequisites:
   
   Firstly you need a C++ compiler for your OS.
   You can download proper version from: https://gcc.gnu.org/install/index.html
    
-   ###Installing:
+   ### Installing:
    * git clone this repo using command
    `git clone https://github.com/barteksmuga/battleship`
    * change directory to battleship
@@ -18,7 +18,8 @@
    * start game using command
    `./start`
 
-  
+![battleship_screen]
+(~/workspace/Xcode/private/battleship/battleshibattleship_screen.jpeg)
   Created by Bartłomiej Smuga.
   MIT License
   Copyright © 2017 Bartłomiej Smuga.
