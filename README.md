@@ -19,7 +19,7 @@
    `./start`
 
 ![battleship_screen]
-(~/workspace/Xcode/private/battleship/battleshibattleship_screen.jpeg)
+(battleship_screen.jpeg)
   Created by Bartłomiej Smuga.
   MIT License
   Copyright © 2017 Bartłomiej Smuga.
