@@ -25,7 +25,7 @@ Each player receives a board with two grids and ten ships. One of the grids is u
 
 `./start`
 
-![battleship_screen](battleship_screen.jpg)
+![battleship_screen](https://image.ibb.co/jmn9bS/battleship_screen.jpg)
 
 Created by Bartłomiej Smuga.
   MIT License
