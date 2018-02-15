@@ -3,16 +3,17 @@
 //  battleship
 //
 //  Created by Bartłomiej Smuga on 15/12/2017.
-//  Copyright © 2017 Bartłomiej Smuga. All rights reserved.
+//  Copyright © 2017 Bartłomiej Smuga
+//  Released under the MIT license
 //
 
 #ifndef Field_hpp
 #define Field_hpp
- 
+
 #include <iostream>
 #include "Point.hpp"
 #include "Ship.hpp"
-
+ 
 class Field{
 public:
     Field();
@@ -21,6 +22,7 @@ public:
     void setShip(Ship*&);
     void setShot();
     void setValue();
+    Ship *getShip();
 private:
     Ship *ship;
     bool sship;
@@ -48,4 +50,8 @@ void Field::setValue(){
     sship = false;
     shot = false;
 }
+Ship* Field::getShip(){
+    return ship;
+}
+
 #endif /* Field_hpp */

@@ -3,7 +3,8 @@
 //  battleship
 //
 //  Created by Bartłomiej Smuga on 05/01/2018.
-//  Copyright © 2018 Bartłomiej Smuga. All rights reserved.
+//  Copyright © 2017 Bartłomiej Smuga
+//  Released under the MIT license
 //
 
 #ifndef PlayerAI_hpp
@@ -12,7 +13,9 @@
 #include <iostream>
 #include <ctime>
 #include <vector>
- 
+
+bool test = false; //if test equals to true AI's ships will be displayed;
+
 class PlayerAI : public Player {
 public:
     PlayerAI();
@@ -31,13 +34,15 @@ public:
     bool checkShipPosition(Ship*&);
     Point shotPointsGenerator_ifWasHit(Point&);
     virtual std::string getName(){return name;}
+    void addSankFields(Point&);
+    
 private:
     std::string name;
     std::vector<Point> chosenStartPoints;
     std::vector<Point> shotPoints;
     int hitsCounter;
 };
-PlayerAI::PlayerAI() : Player(), hitsCounter(0), name("AI") {}
+PlayerAI::PlayerAI() : Player(), name("AI"), hitsCounter(0) {}
 PlayerAI::~PlayerAI(){}
 
 void PlayerAI::createShips(){
@@ -82,6 +87,10 @@ void PlayerAI::createShips(){
             state1 = checkShipPosition(fourMastedShips[i]);
         } while (checkShipPosition(fourMastedShips[i]) || board[0]->checkAroundShip(fourMastedShips[i]));
         board[0]->setShipOnBoard(fourMastedShips[i]);
+    }
+    if(test){
+        std::cout << "TESTTESTTESTTESTTESTTESTTESTTESTTESTTES:\n";
+        board[0]->displayShipsOnBoard();
     }
 }
 Point PlayerAI::takeShot(){
@@ -135,6 +144,10 @@ Point PlayerAI::shotPointsGenerator(){
     shotPoints.push_back(point);
     return point;
 }
+void PlayerAI::addSankFields(Point &point){
+    
+}
+
 Point PlayerAI::shotPointsGenerator_ifWasHit(Point &shot){
     Point possibleShots[4];
     possibleShots[0].x = shot.x + 1; possibleShots[0].y = shot.y;

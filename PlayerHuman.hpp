@@ -3,7 +3,8 @@
 //  battleship
 //
 //  Created by Bartłomiej Smuga on 24/12/2017.
-//  Copyright © 2017 Bartłomiej Smuga. All rights reserved.
+//  Copyright © 2017 Bartłomiej Smuga
+//  Released under the MIT license
 //
 
 #ifndef PlayerHuman_hpp
@@ -13,7 +14,7 @@
 #include "Player.hpp"
 #include <iostream>
 #include <string>
- 
+  
 class PlayerHuman : public Player {
 public:
     PlayerHuman();
@@ -46,8 +47,6 @@ void PlayerHuman::createShips(){
             board[0]->displayShipsOnBoard();
             point = createStart();
             oneMastedShips[i]->setStart(point);
-            direct = createDirection();
-            oneMastedShips[i]->setDirection(direct);
             std::system("clear");
             board[0]->setShipOnBoard(oneMastedShips[i]);
     }
@@ -99,7 +98,7 @@ bool PlayerHuman::correctShot(Point &shot){
 }
 Point PlayerHuman::createStart(){
     Point point;
-    std::cout << "Insert coordinates for your ship start (x,y): ";
+    std::cout << "Insert coordinates for your ship start (y,x): ";
     std::cin >> point;
     return point;
 }
@@ -153,4 +152,5 @@ bool PlayerHuman::checkShipPosition(Ship *&ship){
 Point PlayerHuman::shotPointsGenerator_ifWasHit(Point &point){
     return Point(0,0);
 }
+
 #endif /* PlayerHuman_hpp */
