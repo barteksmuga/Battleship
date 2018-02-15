@@ -37,6 +37,7 @@
 		988E0A571FE40CE2002E4A1B /* Field.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Field.hpp; sourceTree = "<group>"; };
 		98D0962E1FEF1ADF004C2BA7 /* Player.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
 		98D096311FEF29D6004C2BA7 /* PlayerHuman.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PlayerHuman.hpp; sourceTree = "<group>"; };
+		98E5386B203579E9003AAA7A /* MenuOptions.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MenuOptions.hpp; sourceTree = "<group>"; };
 		98E87C701FFF9D740024D94A /* PlayerAI.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PlayerAI.hpp; sourceTree = "<group>"; };
 		98ED6FFB2002BBBA000390C9 /* Game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +95,7 @@
 				988E0A571FE40CE2002E4A1B /* Field.hpp */,
 				988E0A541FE4077E002E4A1B /* Ship.hpp */,
 				988E0A511FE406F6002E4A1B /* Point.hpp */,
+				98E5386B203579E9003AAA7A /* MenuOptions.hpp */,
 			);
 			path = battleship;
 			sourceTree = "<group>";

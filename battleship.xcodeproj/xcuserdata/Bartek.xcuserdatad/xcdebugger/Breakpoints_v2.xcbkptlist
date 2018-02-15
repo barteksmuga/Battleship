@@ -9,14 +9,154 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "battleship/PlayerAI.hpp"
-            timestampString = "537823972.046502"
+            filePath = "battleship/Player.hpp"
+            timestampString = "540377362.670678"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "PlayerAI::createShips()"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "Player::isSunken(Ship *&amp;ship, Point &amp;point)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "battleship/Player.hpp"
+            timestampString = "540377362.6708471"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "Player::isSunken(Ship *&amp;ship, Point &amp;point)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "battleship/Player.hpp"
+            timestampString = "540377362.670966"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "Player::isSunken(Ship *&amp;ship, Point &amp;point)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "battleship/Player.hpp"
+            timestampString = "540377362.671078"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "Player::Player()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Player::Player()"
+                  moduleName = "battleship"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Bartek/workspace/Xcode/private/battleship/battleship/Player.hpp"
+                  timestampString = "540377363.037537"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
+                  offsetFromSymbolStart = "124">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Player::Player()"
+                  moduleName = "battleship"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Bartek/workspace/Xcode/private/battleship/battleship/Player.hpp"
+                  timestampString = "540377363.039975"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
+                  offsetFromSymbolStart = "254">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Player::Player()"
+                  moduleName = "battleship"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Bartek/workspace/Xcode/private/battleship/battleship/Player.hpp"
+                  timestampString = "540377363.042235"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
+                  offsetFromSymbolStart = "384">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Player::Player()"
+                  moduleName = "battleship"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Bartek/workspace/Xcode/private/battleship/battleship/Player.hpp"
+                  timestampString = "540377363.045351"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
+                  offsetFromSymbolStart = "514">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Player::Player()"
+                  moduleName = "battleship"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Bartek/workspace/Xcode/private/battleship/battleship/Player.hpp"
+                  timestampString = "540377363.048788"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
+                  offsetFromSymbolStart = "650">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Player::Player()"
+                  moduleName = "battleship"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Bartek/workspace/Xcode/private/battleship/battleship/Player.hpp"
+                  timestampString = "540377363.052016"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "65"
+                  endingLineNumber = "65"
+                  offsetFromSymbolStart = "673">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

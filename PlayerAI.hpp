@@ -13,7 +13,9 @@
 #include <iostream>
 #include <ctime>
 #include <vector>
-  
+
+bool test = true; //if test equals to true AI's ships will be displayed;
+
 class PlayerAI : public Player {
 public:
     PlayerAI();
@@ -32,6 +34,8 @@ public:
     bool checkShipPosition(Ship*&);
     Point shotPointsGenerator_ifWasHit(Point&);
     virtual std::string getName(){return name;}
+    void addSankFields(Point&);
+    
 private:
     std::string name;
     std::vector<Point> chosenStartPoints;
@@ -83,6 +87,10 @@ void PlayerAI::createShips(){
             state1 = checkShipPosition(fourMastedShips[i]);
         } while (checkShipPosition(fourMastedShips[i]) || board[0]->checkAroundShip(fourMastedShips[i]));
         board[0]->setShipOnBoard(fourMastedShips[i]);
+    }
+    if(test){
+        std::cout << "TESTTESTTESTTESTTESTTESTTESTTESTTESTTES:\n";
+        board[0]->displayShipsOnBoard();
     }
 }
 Point PlayerAI::takeShot(){
@@ -136,6 +144,10 @@ Point PlayerAI::shotPointsGenerator(){
     shotPoints.push_back(point);
     return point;
 }
+void PlayerAI::addSankFields(Point &point){
+    
+}
+
 Point PlayerAI::shotPointsGenerator_ifWasHit(Point &shot){
     Point possibleShots[4];
     possibleShots[0].x = shot.x + 1; possibleShots[0].y = shot.y;
@@ -203,5 +215,4 @@ bool PlayerAI::checkShipPosition(Ship *&ship){
             break;
     }
 }
-
 #endif /* PlayerAI_hpp */

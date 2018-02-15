@@ -9,7 +9,7 @@
 
 #ifndef Field_hpp
 #define Field_hpp
- 
+
 #include <iostream>
 #include "Point.hpp"
 #include "Ship.hpp"
@@ -22,6 +22,7 @@ public:
     void setShip(Ship*&);
     void setShot();
     void setValue();
+    Ship *getShip();
 private:
     Ship *ship;
     bool sship;
@@ -48,6 +49,9 @@ void Field::setShot(){
 void Field::setValue(){
     sship = false;
     shot = false;
+}
+Ship* Field::getShip(){
+    return ship;
 }
 
 #endif /* Field_hpp */

@@ -47,8 +47,6 @@ void PlayerHuman::createShips(){
             board[0]->displayShipsOnBoard();
             point = createStart();
             oneMastedShips[i]->setStart(point);
-            direct = createDirection();
-            oneMastedShips[i]->setDirection(direct);
             std::system("clear");
             board[0]->setShipOnBoard(oneMastedShips[i]);
     }
@@ -100,7 +98,7 @@ bool PlayerHuman::correctShot(Point &shot){
 }
 Point PlayerHuman::createStart(){
     Point point;
-    std::cout << "Insert coordinates for your ship start (x,y): ";
+    std::cout << "Insert coordinates for your ship start (y,x): ";
     std::cin >> point;
     return point;
 }

@@ -9,7 +9,12 @@
 
 #ifndef Board_hpp
 #define Board_hpp
-  
+
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define BLUE    "\033[34m"
+
 #include <iostream>
 #include <iomanip>
 #include "Point.hpp"
@@ -27,8 +32,10 @@ public:
     void setShipOnBoard(Ship*&);
     void takeAShotOnBoard(Point&);
     bool isShip(Point&);
+    Ship *getShip(Point&);
     void displayShipsOnBoard();
     void displayShotsOnBoard();
+    bool isShot(Point&);
 private:
     Field board[AREA_SIZE][AREA_SIZE];
 };
@@ -124,6 +131,12 @@ void Board::takeAShotOnBoard(Point &point){
 bool Board::isShip(Point &shot){
     return board[shot.x][shot.y].isShip();
 }
+Ship* Board::getShip(Point &shot){
+    return board[shot.x][shot.y].getShip();
+}
+bool Board::isShot(Point &point){
+    return board[point.x][point.y].isShot();
+}
 void Board::displayShipsOnBoard(){
     std::cout << "\n";
     const int CWIDTH = 3;
@@ -144,9 +157,9 @@ void Board::displayShipsOnBoard(){
         for(int j=0; j<BOARD_SIZE; j++){
             if(board[i][j].isShip()){
                 if(board[i][j].isShot()){
-                    std::cout << std::setw(CWIDTH) << " x |";
+                    std::cout << std::setw(CWIDTH) << RED << " x " << RESET << "|";
                 } else{
-                    std::cout << std::setw(CWIDTH) << " 1 |";
+                    std::cout << std::setw(CWIDTH) << BLUE << " 1 " << RESET << "|";
                 }
             } else {
                 if(board[i][j].isShot())
@@ -184,7 +197,7 @@ void Board::displayShotsOnBoard(){
         for(int j=0; j<BOARD_SIZE; j++){
             if(board[i][j].isShot()){
                 if(board[i][j].isShip())
-                    std::cout << std::setw(CWIDTH) << " x |";
+                    std::cout << std::setw(CWIDTH) << GREEN << " x " << RESET << "|";
                 else
                     std::cout << std::setw(CWIDTH) << " o |";
             } else {
