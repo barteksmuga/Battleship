@@ -98,7 +98,7 @@ bool PlayerHuman::correctShot(Point &shot){
 }
 Point PlayerHuman::createStart(){
     Point point;
-    std::cout << "Insert coordinates for your ship start (y,x): ";
+    std::cout << "Insert coordinates for your ship start (x,y): ";
     std::cin >> point;
     return point;
 }

@@ -140,7 +140,7 @@ bool Board::isShot(Point &point){
 void Board::displayShipsOnBoard(){
     std::cout << "\n";
     const int CWIDTH = 3;
-    int y=0;
+    int i=0;
     std::cout << std::setw(CWIDTH) << "   |";
     for(int x=0; x<10; x++)
         std::cout << std::setw(CWIDTH) << x << "|";
@@ -152,23 +152,23 @@ void Board::displayShipsOnBoard(){
         std::cout << std::setw(CWIDTH) << "----";
     
     std::cout << std::endl;
-    for(int i=0; i<BOARD_SIZE; i++){
-        std::cout << std::setw(CWIDTH) << y << "|";
-        for(int j=0; j<BOARD_SIZE; j++){
-            if(board[i][j].isShip()){
-                if(board[i][j].isShot()){
+    for(int y=0; y<BOARD_SIZE; y++){
+        std::cout << std::setw(CWIDTH) << i << "|";
+        for(int x=0; x<BOARD_SIZE; x++){
+            if(board[x][y].isShip()){
+                if(board[x][y].isShot()){
                     std::cout << std::setw(CWIDTH) << RED << " x " << RESET << "|";
                 } else{
                     std::cout << std::setw(CWIDTH) << BLUE << " 1 " << RESET << "|";
                 }
             } else {
-                if(board[i][j].isShot())
+                if(board[x][y].isShot())
                     std::cout << std::setw(CWIDTH) << " o |";
                 else
                     std::cout << std::setw(CWIDTH) << "   |";
             }
         }
-        y++;
+        i++;
         std::cout << std::endl;
         std::cout << " ";
         for(int k=0; k<=BOARD_SIZE; k++)
@@ -180,7 +180,7 @@ void Board::displayShipsOnBoard(){
 void Board::displayShotsOnBoard(){
     std::cout << "\n\n\tSHOTS BOARD: \n";
     const int CWIDTH = 3;
-    int y=0;
+    int i=0;
     std::cout << std::setw(CWIDTH) << "   |";
     for(int x=0; x<10; x++){
         std::cout << std::setw(CWIDTH) << x << "|";
@@ -192,11 +192,11 @@ void Board::displayShotsOnBoard(){
         std::cout << std::setw(CWIDTH) << "----";
     
     std::cout << std::endl;
-    for(int i=0; i<BOARD_SIZE; i++){
-        std::cout << std::setw(CWIDTH) << y << "|";
-        for(int j=0; j<BOARD_SIZE; j++){
-            if(board[i][j].isShot()){
-                if(board[i][j].isShip())
+    for(int y=0; y<BOARD_SIZE; y++){
+        std::cout << std::setw(CWIDTH) << i << "|";
+        for(int x=0; x<BOARD_SIZE; x++){
+            if(board[x][y].isShot()){
+                if(board[x][y].isShip())
                     std::cout << std::setw(CWIDTH) << GREEN << " x " << RESET << "|";
                 else
                     std::cout << std::setw(CWIDTH) << " o |";
@@ -204,7 +204,7 @@ void Board::displayShotsOnBoard(){
                 std::cout << std::setw(CWIDTH) << "   |";
             }
         }
-        y++;
+        i++;
         std::cout << std::endl;
         std::cout << " ";
         for(int k=0; k<=BOARD_SIZE; k++)
