@@ -24,6 +24,7 @@
 #include <fstream>
 
 class Game{
+    
 public:
     Game();
     ~Game();

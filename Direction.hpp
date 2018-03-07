@@ -15,6 +15,7 @@
 enum Direction {left = 1,up = 2,right = 3,down = 4};
 
 Direction setDirection(){
+    
     Direction direction;
     int decision;
     bool flag = false;

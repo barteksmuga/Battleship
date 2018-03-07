@@ -14,7 +14,8 @@
 #include "Player.hpp"
 #include <iostream>
 #include <string>
-  
+
+
 class PlayerHuman : public Player {
 public:
     PlayerHuman();

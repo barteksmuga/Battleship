@@ -11,6 +11,7 @@
 #define Point_hpp
 
 #include <iostream>
+
 class Point;
 std::istream &operator >>(std::istream&,Point&);
   

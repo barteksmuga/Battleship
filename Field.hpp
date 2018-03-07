@@ -15,6 +15,7 @@
 #include "Ship.hpp"
  
 class Field{
+    
 public:
     Field();
     bool isShip();

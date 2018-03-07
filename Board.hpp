@@ -25,6 +25,7 @@
 #define AREA_SIZE 12
 #define BOARD_SIZE 10
 
+
 class Board{
 public:
     Board();

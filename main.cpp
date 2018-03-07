@@ -19,7 +19,7 @@
 #define EXIT_SUCCESS 0
 
 int main() {
-
+    //fix drawing, shooting and direction;
     {
         Game game;
         game.run();
