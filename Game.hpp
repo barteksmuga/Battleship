@@ -36,6 +36,7 @@ private:
     void winner();
     void readFromFile(std::string);
     void finish();
+    void playerMoves(Player*&, Player*&);
     Player *player[2];
     int player_0_hits;
     int player_1_hits;
@@ -148,7 +149,8 @@ void Game::menu() {
             setShips();
             int maxHits = Player::maxHits / 2;
             do {
-                startShooting();
+//                startShooting();
+                playerMoves(player[0], player[1]);
                 player_0_hits = player[0]->getHitsCounter();
                 player_1_hits = player[1]->getHitsCounter();
             } while(player_0_hits < maxHits && player_1_hits < maxHits);
@@ -164,6 +166,26 @@ void Game::menu() {
     }
     
 }
+void Game::playerMoves(Player *&movingPLayer, Player *&enemy) {
+    Point shot;
+    Ship *hitShip = nullptr;
+    
+    movingPLayer->board[0]->displayShipsOnBoard();
+    enemy->board[0]->displayShotsOnBoard();
+    
+    shot = movingPLayer->takeShot();
+    enemy->board[0]->takeAShotOnBoard(shot);
+    
+    if (enemy->correctShot(shot)) {
+        movingPLayer->hitsIncrement();
+        hitShip = enemy->board[0]->getShip(shot);
+        if (enemy->isSunken(hitShip, shot)) {
+            std::cout << RED << "SHIP SUNKEN!" << RESET << std::endl;
+        }
+    }
+    system("clear");
+}
+
 void Game::readFromFile(std::string fileName) {
     
     std::string text;

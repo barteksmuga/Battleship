@@ -35,11 +35,12 @@
 		988E0A511FE406F6002E4A1B /* Point.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Point.hpp; sourceTree = "<group>"; };
 		988E0A541FE4077E002E4A1B /* Ship.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Ship.hpp; sourceTree = "<group>"; };
 		988E0A571FE40CE2002E4A1B /* Field.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Field.hpp; sourceTree = "<group>"; };
+		98C496AF204FE15400DD01F0 /* PlayerAI.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PlayerAI.hpp; sourceTree = "<group>"; };
+		98C496B0204FE17500DD01F0 /* Game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
+		98C496B1204FE17500DD01F0 /* Direction.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Direction.hpp; sourceTree = "<group>"; };
+		98C496B2204FE17500DD01F0 /* MenuOptions.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MenuOptions.hpp; sourceTree = "<group>"; };
 		98D0962E1FEF1ADF004C2BA7 /* Player.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
 		98D096311FEF29D6004C2BA7 /* PlayerHuman.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PlayerHuman.hpp; sourceTree = "<group>"; };
-		98E5386B203579E9003AAA7A /* MenuOptions.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MenuOptions.hpp; sourceTree = "<group>"; };
-		98E87C701FFF9D740024D94A /* PlayerAI.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PlayerAI.hpp; sourceTree = "<group>"; };
-		98ED6FFB2002BBBA000390C9 /* Game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,15 +88,16 @@
 			isa = PBXGroup;
 			children = (
 				988E0A491FE406B9002E4A1B /* main.cpp */,
-				988539851FE7464700F5BA8F /* Board.hpp */,
-				98D096311FEF29D6004C2BA7 /* PlayerHuman.hpp */,
-				98E87C701FFF9D740024D94A /* PlayerAI.hpp */,
+				98C496B0204FE17500DD01F0 /* Game.hpp */,
 				98D0962E1FEF1ADF004C2BA7 /* Player.hpp */,
-				98ED6FFB2002BBBA000390C9 /* Game.hpp */,
-				988E0A571FE40CE2002E4A1B /* Field.hpp */,
+				98C496AF204FE15400DD01F0 /* PlayerAI.hpp */,
+				98D096311FEF29D6004C2BA7 /* PlayerHuman.hpp */,
+				988539851FE7464700F5BA8F /* Board.hpp */,
 				988E0A541FE4077E002E4A1B /* Ship.hpp */,
+				988E0A571FE40CE2002E4A1B /* Field.hpp */,
 				988E0A511FE406F6002E4A1B /* Point.hpp */,
-				98E5386B203579E9003AAA7A /* MenuOptions.hpp */,
+				98C496B1204FE17500DD01F0 /* Direction.hpp */,
+				98C496B2204FE17500DD01F0 /* MenuOptions.hpp */,
 			);
 			path = battleship;
 			sourceTree = "<group>";
