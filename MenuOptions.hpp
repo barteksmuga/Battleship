@@ -10,6 +10,7 @@
 #define MenuOptions_hpp
 
 #include <iostream>
+
 enum MenuOptions {
     gameDescription = 1,
     rules = 2,

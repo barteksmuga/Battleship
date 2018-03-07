@@ -10,6 +10,7 @@
 #ifndef Game_hpp
 #define Game_hpp
 
+
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
 #define GREEN   "\033[32m"

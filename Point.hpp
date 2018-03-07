@@ -15,6 +15,7 @@ class Point;
 std::istream &operator >>(std::istream&,Point&);
   
 class Point{
+    
 public:
     Point();
     Point(int,int);

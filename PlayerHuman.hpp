@@ -16,6 +16,7 @@
 #include <string>
   
 class PlayerHuman : public Player {
+    
 public:
     PlayerHuman();
     ~PlayerHuman();

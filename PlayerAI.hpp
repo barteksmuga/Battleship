@@ -17,6 +17,7 @@
 bool test = false; //if test equals to true AI's ships will be displayed;
 
 class PlayerAI : public Player {
+    
 public:
     PlayerAI();
     ~PlayerAI();

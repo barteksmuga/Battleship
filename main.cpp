@@ -19,6 +19,7 @@
 #define EXIT_SUCCESS 0
 
 int main() {
+    
     //    zepsute kierunki, zmienic rysowanie, poprawic strzelanie!;
     {
         Game game;

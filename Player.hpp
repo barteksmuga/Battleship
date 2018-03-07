@@ -14,6 +14,7 @@
 #include "Ship.hpp"
 #include "Board.hpp"
 
+
 const int ONE_MASTED_SHIPS = 0;
 const int TWO_MASTED_SHIPS = 0;
 const int THREE_MASTED_SHIPS = 0;

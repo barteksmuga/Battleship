@@ -15,6 +15,7 @@
 #include "Direction.hpp"
   
 class Ship{
+    
 public:
     Ship(int);
     ~Ship();
