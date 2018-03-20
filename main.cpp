@@ -20,7 +20,6 @@
 
 int main() {
     
-    //    zepsute kierunki, zmienic rysowanie, poprawic strzelanie!;
     {
         Game game;
         game.run();

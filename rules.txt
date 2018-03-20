@@ -7,6 +7,7 @@ List of ships:
 
 Each player has ONE Battleship, TWO Cruisers, THREE Submarines and FOUR Destroyers.
 
-Each ship must be placed horizontally or vertically — not diagonally — across grid spaces. Ships can’t touch each other and they can't occupy the same grid space. You cannot change the position of the ships after the game begins.
+Each ship must be placed horizontally or vertically — not diagonally — across grid spaces. Ships can’t touch each other and they can't occupy the same grid space. You cannot change the position of the 
+ships after the game begins.
 
 GOOD LUCK!

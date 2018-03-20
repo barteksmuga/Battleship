@@ -20,10 +20,10 @@
 #include "Point.hpp"
 #include "Ship.hpp"
 
-const char EMPTY_FIELD = ' ';
-const char SHOT_FIELD = 'X';
-const char MISSED_FIELD = '0';
-const char OWN_SHIP = 'Z';
+const std::string EMPTY_FIELD = "   ";
+const std::string SHOT_FIELD = " X ";
+const std::string MISSED_FIELD = " 0 ";
+const std::string OWN_SHIP = " Z ";
 
 class Field{
 public:
@@ -40,43 +40,72 @@ private:
     bool sship;
     bool shot;
 };
+
 Field::Field(){
     ship = nullptr;
     sship = false;
     shot = false;
 }
+
 bool Field::isShip() {
     return sship;
 }
+
 bool Field::isShot() {
     return shot;
 }
+
 void Field::setShip(Ship *&newShip) {
     ship = newShip;
     sship = true;
 }
+
 void Field::setShot() {
     shot = true;
 }
+
 void Field::setValue() {
     sship = false;
     shot = false;
 }
+
 Ship* Field::getShip() {
     return ship;
 }
-//std::string Field::getSignToPrint(bool isOwn) {
-//    char signToDraw;
-//    std::string colorCode;
-//    
-//    if (!isShot()) {
-//        if (isShip()){
-//            signToDraw = OWN_SHIP;
-//            colorCode = BLUE;
-//        } else
-//            signToDraw = EMPTY_FIELD;
-//    } else {
-//        signToDraw = SHOT_FIELD;
-//    }
-//}
+
+std::string Field::getSignToPrint(bool isOwn) {
+    std::string signToDraw;
+    std::string colorCode;
+    
+    if (isOwn) {
+        if (isShip()) {
+            if (isShot()) {
+                signToDraw = SHOT_FIELD;
+                colorCode = RED;
+            } else {
+                signToDraw = OWN_SHIP;
+                colorCode = BLUE;
+            }
+        } else {
+            if (isShot()) {
+                signToDraw = MISSED_FIELD;
+            } else {
+                signToDraw = EMPTY_FIELD;
+            }
+        }
+    } else {
+        if (isShot()) {
+            if (isShip()) {
+                signToDraw = SHOT_FIELD;
+                colorCode = GREEN;
+            } else {
+                signToDraw = MISSED_FIELD;
+            }
+        } else {
+            signToDraw = EMPTY_FIELD;
+        }
+    }
+
+    return colorCode + signToDraw + RESET;
+}
 #endif /* Field_hpp */

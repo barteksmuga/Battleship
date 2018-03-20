@@ -14,10 +14,8 @@
 #include <ctime>
 #include <vector>
 
-bool test = false; //if test equals to true AI's ships will be displayed;
 
 class PlayerAI : public Player {
-    
 public:
     PlayerAI();
     ~PlayerAI();
@@ -36,16 +34,19 @@ public:
     Point shotPointsGenerator_ifWasHit(Point&);
     virtual std::string getName(){return name;}
     void addSankFields(Point&);
-    
+    virtual void drawPlayerBoard(bool);
+    virtual Board *getBoard();
 private:
     std::string name;
     std::vector<Point> chosenStartPoints;
     std::vector<Point> shotPoints;
     int hitsCounter;
 };
-PlayerAI::PlayerAI() : Player(), name("AI"), hitsCounter(0) {}
+PlayerAI::PlayerAI() : Player(), name("AI"), hitsCounter(0) {showOutput = false;}
 PlayerAI::~PlayerAI(){}
-
+Board* PlayerAI::getBoard() {
+    return board[0];
+}
 void PlayerAI::createShips(){
     Point point;
     Direction direct;
@@ -88,10 +89,6 @@ void PlayerAI::createShips(){
             state1 = checkShipPosition(fourMastedShips[i]);
         } while (checkShipPosition(fourMastedShips[i]) || board[0]->checkAroundShip(fourMastedShips[i]));
         board[0]->setShipOnBoard(fourMastedShips[i]);
-    }
-    if(test){
-        std::cout << "TESTTESTTESTTESTTESTTESTTESTTESTTESTTES:\n";
-        board[0]->displayShipsOnBoard();
     }
 }
 Point PlayerAI::takeShot(){
@@ -215,5 +212,8 @@ bool PlayerAI::checkShipPosition(Ship *&ship){
                 return false;
             break;
     }
+}
+void PlayerAI::drawPlayerBoard(bool isOwn) {
+    board[0]->drawBoard(isOwn);
 }
 #endif /* PlayerAI_hpp */

@@ -26,6 +26,9 @@
 #define AREA_SIZE 12
 #define BOARD_SIZE 10
 
+const char HORIZONTAL_SEPARATOR = '-';
+const char VERTICAL_SEPARATOR = '|';
+
 class Board{
 public:
     Board();
@@ -37,15 +40,22 @@ public:
     void displayShipsOnBoard();
     void displayShotsOnBoard();
     bool isShot(Point&);
+    void drawBoard(bool);
+    void printHorizontalLine();
+    void printHeader();
+    bool isCorrect(Point&);
+    bool isSunken(Ship*&,Point&);
 private:
     Field board[AREA_SIZE][AREA_SIZE];
 };
-Board::Board(){
+
+Board::Board() {
     for(int i=0; i<AREA_SIZE; i++)
         for (int j=0; j<AREA_SIZE; j++)
             board[i][j].setValue();
 };
-bool Board::checkAroundShip(Ship *&ship){
+
+bool Board::checkAroundShip(Ship *&ship) {
     Point start_ = ship->getStart();
     Point end_ = start_;
     int length_ = ship->getLength();
@@ -104,114 +114,109 @@ bool Board::checkAroundShip(Ship *&ship){
 void Board::setShipOnBoard(Ship *&ship){
     Point temporary_start = ship->getStart();
     switch (ship->getDirection()) {
-        case left:
+        case up:
             for(int i=(temporary_start.y); i>(temporary_start.y - ship->getLength()); i--){
                 board[temporary_start.x][i].setShip(ship);
             }
             break;
-        case up:
+        case left:
             for(int i=temporary_start.x; i>(temporary_start.x - ship->getLength()); i--){
                 board[i][temporary_start.y].setShip(ship);
             }
             break;
-        case right:
+        case down:
             for(int i=temporary_start.y; i<(temporary_start.y + ship->getLength()); i++){
                 board[temporary_start.x][i].setShip(ship);
             }
             break;
-        case down:
+        case right:
             for(int i=temporary_start.x; i<(temporary_start.x + ship->getLength()); i++){
                 board[i][temporary_start.y].setShip(ship);
             }
             break;
     }
 }
-void Board::takeAShotOnBoard(Point &point){
+
+void Board::takeAShotOnBoard(Point &point) {
     board[point.x][point.y].setShot();
 }
+
 bool Board::isShip(Point &shot){
     return board[shot.x][shot.y].isShip();
 }
+
 Ship* Board::getShip(Point &shot){
     return board[shot.x][shot.y].getShip();
 }
+
 bool Board::isShot(Point &point){
     return board[point.x][point.y].isShot();
 }
-void Board::displayShipsOnBoard(){
+
+void Board::drawBoard(bool isOwn) {
+    const int CWIDTH = 3;
+    printHeader();
+    printHorizontalLine();
+    
+    for (int y=0; y<BOARD_SIZE; ++y) {
+        std::cout << std::setw(CWIDTH) << std::internal << y << VERTICAL_SEPARATOR;
+        for (int x=0; x<BOARD_SIZE; ++x) {
+            std::cout << std::setw(CWIDTH)  << board[x][y].getSignToPrint(isOwn) << " " << VERTICAL_SEPARATOR;
+        }
+        std::cout << std::endl;
+        printHorizontalLine();
+    }
     std::cout << "\n";
-    const int CWIDTH = 3;
-    int i=0;
-    std::cout << std::setw(CWIDTH) << "   |";
-    for(int x=0; x<10; x++)
-        std::cout << std::setw(CWIDTH) << x << "|";
-    
-    
-    std::cout << std::endl;
-    std::cout << " ";
-    for(int k=0; k<=BOARD_SIZE; k++)
-        std::cout << std::setw(CWIDTH) << "----";
-    
-    std::cout << std::endl;
-    for(int y=0; y<BOARD_SIZE; y++){
-        std::cout << std::setw(CWIDTH) << i << "|";
-        for(int x=0; x<BOARD_SIZE; x++){
-            if(board[x][y].isShip()){
-                if(board[x][y].isShot()){
-                    std::cout << std::setw(CWIDTH) << RED << " x " << RESET << "|";
-                } else{
-                    std::cout << std::setw(CWIDTH) << BLUE << " 1 " << RESET << "|";
-                }
-            } else {
-                if(board[x][y].isShot())
-                    std::cout << std::setw(CWIDTH) << " o |";
-                else
-                    std::cout << std::setw(CWIDTH) << "   |";
-            }
-        }
-        i++;
-        std::cout << std::endl;
-        std::cout << " ";
-        for(int k=0; k<=BOARD_SIZE; k++)
-            std::cout << std::setw(CWIDTH) << "----";
-        
-        std::cout << std::endl;
-    }
-}
-void Board::displayShotsOnBoard(){
-    std::cout << "\n\n\tSHOTS BOARD: \n";
-    const int CWIDTH = 3;
-    int i=0;
-    std::cout << std::setw(CWIDTH) << "   |";
-    for(int x=0; x<10; x++){
-        std::cout << std::setw(CWIDTH) << x << "|";
-    }
-    
-    std::cout << std::endl;
-    std::cout << " ";
-    for(int k=0; k<=BOARD_SIZE; k++)
-        std::cout << std::setw(CWIDTH) << "----";
-    
-    std::cout << std::endl;
-    for(int y=0; y<BOARD_SIZE; y++){
-        std::cout << std::setw(CWIDTH) << i << "|";
-        for(int x=0; x<BOARD_SIZE; x++){
-            if(board[x][y].isShot()){
-                if(board[x][y].isShip())
-                    std::cout << std::setw(CWIDTH) << GREEN << " x " << RESET << "|";
-                else
-                    std::cout << std::setw(CWIDTH) << " o |";
-            } else {
-                std::cout << std::setw(CWIDTH) << "   |";
-            }
-        }
-        i++;
-        std::cout << std::endl;
-        std::cout << " ";
-        for(int k=0; k<=BOARD_SIZE; k++)
-            std::cout << std::setw(CWIDTH) << "----";
-        std::cout << std::endl;
-    }
 }
 
+void Board::printHorizontalLine() {
+    for (int i=0; i<((BOARD_SIZE)*5)+4; ++i)
+        std::cout << HORIZONTAL_SEPARATOR;
+    std::cout << std::endl;
+}
+
+void Board::printHeader() {
+    const int CWIDTH = 3;
+    std::cout << "\n" << std::setw(CWIDTH) << " " << VERTICAL_SEPARATOR;
+    for (int x=0; x<BOARD_SIZE; ++x)
+        std::cout << std::setw(CWIDTH) << x << " " << VERTICAL_SEPARATOR;
+    std::cout << std::endl;
+}
+bool Board::isCorrect(Point &point) {
+    return board[point.x][point.y].isShip();
+}
+bool Board::isSunken(Ship *&ship, Point &point){
+    int length_ = ship->getLength();
+    int shipsFieldHit = 0;
+    Direction direct_ = ship->getDirection();
+    
+    if(direct_ == up || direct_ == down) {
+        for(int i=point.y; i<(point.y+length_); i++) {
+            if(board[point.x][i].isShip() && board[point.x][i].isShot())
+                ++shipsFieldHit;
+        }
+        
+        for(int i=(point.y-1); i>=(point.y-length_); i--) {
+            if(board[point.x][i].isShip() && board[point.x][i].isShot())
+                ++shipsFieldHit;
+        }
+    }
+    if(direct_ == left || direct_ == right) {
+        for(int i=point.x; i<(point.x+length_); i++) {
+            if(board[i][point.y].isShip() && board[i][point.y].isShot())
+                ++shipsFieldHit;
+        }
+        for(int i=(point.x-1); i>(point.x-length_); i--) {
+            if(board[i][point.y].isShip() && board[i][point.y].isShot())
+                ++shipsFieldHit;
+        }
+    }
+    if(shipsFieldHit == length_){
+        return true;
+        
+    } else {
+        return false;
+    }
+}
 #endif /* Board_hpp */
+

@@ -35,6 +35,10 @@ public:
     virtual std::string getName()=0;
     virtual Point shotPointsGenerator_ifWasHit(Point&)=0;
     virtual bool isSunken(Ship*&,Point&);
+    virtual void drawPlayerBoard(bool)=0;
+    virtual bool getShowOutput();
+    virtual Board *getBoard()=0;
+    static int getMaxHits(){return maxHits;}
 protected:
     Board *board[2];
     Ship *oneMastedShips[ONE_MASTED_SHIPS];
@@ -42,8 +46,11 @@ protected:
     Ship *threeMastedShips[THREE_MASTED_SHIPS];
     Ship *fourMastedShips[FOUR_MASTED_SHIPS];
     static int maxHits;
+    bool showOutput;
 };
+
 int Player::maxHits = 0;
+
 Player::Player(){
     for(int i=0;i<2;i++)
         board[i] = new Board;
@@ -71,13 +78,15 @@ Player::~Player(){
     delete fourMastedShips[FOUR_MASTED_SHIPS];
     delete board[2];
 }
+
+bool Player::getShowOutput() {
+    return showOutput;
+}
 bool Player::isSunken(Ship *&ship, Point &point){
-    /* musze sprawdzac inaczej pola. w zaleznosci od strzelonego punktu w dol/gore/lewo/prawo, bo sprawdzam pola od startu, gdzie nie zawsze zaczynam trafiac!*/
     if(ship == nullptr)
         return false;
     
     int length_ = ship->getLength();
-//    Point start_ = ship->getStart();
     Point shot_point = point;
     Point tmp_point(0,0);
     int shipsFieldHit = 0;
@@ -117,66 +126,5 @@ bool Player::isSunken(Ship *&ship, Point &point){
     } else {
         return false;
     }
-//    if(length_ > 1) {
-//        switch(ship->getDirection()){
-//            case left:
-//                for(int i=(start_.y); i>(start_.y - length_); i--) {
-//                    point.x = start_.x;
-//                    point.y = i;
-//                    if(board[0]->isShot(point))
-//                        ++shipsFieldHit;
-//
-//                }
-//                if(shipsFieldHit == length_)
-//                    return true;
-//
-//                return false;
-//                break;
-//            case up:
-//                for(int i=(start_.x); i>(start_.x-length_); i--){
-//                    point.x = i;
-//                    point.y = start_.y;
-//                    if(board[0]->isShot(point))
-//                        ++shipsFieldHit;
-//
-//                }
-//                if(shipsFieldHit == length_)
-//                    return true;
-//
-//                return false;
-//
-//                break;
-//            case right:
-//                for(int i=(start_.y); i<(start_.y + length_); i++){
-//                    point.x = start_.x;
-//                    point.y = i;
-//                    if(board[0]->isShot(point))
-//                        ++shipsFieldHit;
-//
-//                }
-//                if(shipsFieldHit == length_)
-//                    return true;
-//
-//                return false;
-//
-//                break;
-//            case down:
-//                for(int i=(start_.x); i<(start_.x + length_); i++){
-//                    point.x = i;
-//                    point.y = start_.y;
-//                    if(board[0]->isShot(point))
-//                        ++shipsFieldHit;
-//
-//                }
-//                if(shipsFieldHit == length_)
-//                    return true;
-//
-//                return false;
-//
-//                break;
-//        }
-//    } else {
-//        return true;
-//    }
 }
 #endif /* Player_hpp */

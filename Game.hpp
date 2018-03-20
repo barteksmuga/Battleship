@@ -14,7 +14,9 @@
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
 #define GREEN   "\033[32m"
+#define YELLOW   "\033[33m"
 
+#include "GameState.hpp"
 #include "MenuOptions.hpp"
 #include "PlayerAI.hpp"
 #include "PlayerHuman.hpp"
@@ -34,104 +36,49 @@ private:
     void setShips();
     void startShooting();
     void menu();
-    void winner();
+    void winner(std::string);
     void readFromFile(std::string);
     void finish();
-    void playerMoves(Player*&, Player*&);
+    bool playerMoves(Player*&, Player*&);
+    void printMonit(Player*&,std::string);
+    void printPlayerBoard(Player*&,Player*&);
+    void gameLoop();
     Player *player[2];
-    int player_0_hits;
-    int player_1_hits;
+    GameState gameState;
+    std::string whoWon;
 };
-Game::Game(){player_0_hits = 0; player_1_hits = 0;}
+Game::Game(){gameState = NOT_STARTED; whoWon = "noName";}
 Game::~Game(){}
 
 void Game::startGame() {
     player[0] = new PlayerHuman();
     player[1] = new PlayerAI();
+    gameState = STARTED;
 }
 void Game::setShips() {
     player[0]->createShips();
     player[1]->createShips();
 }
-void Game::startShooting() {
-    std::system("clear");
-    bool humansFlag = false;
-    bool AIsFlag = false;
-    Point humansShot;
-    Point AIsShot;
-    int maxHits = Player::maxHits / 2;
-    Ship *hitShip = nullptr;
-    do {
-        player[0]->board[0]->displayShipsOnBoard();
-        player[1]->board[0]->displayShotsOnBoard();
-        
-        humansShot = player[0]->takeShot();
-        player[1]->board[0]->takeAShotOnBoard(humansShot);
 
-        if(player[1]->correctShot(humansShot)) {
-            std::cout << GREEN << "YOU'VE HIT A SHIP! GO AHEAD!" << RESET << std::endl;
-            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-            humansFlag = true;
-            player[0]->hitsIncrement();
-            hitShip = player[1]->board[0]->getShip(humansShot);
-            if(player[1]->isSunken(hitShip, humansShot)) {
-                std::cout << GREEN << "HIT AND SANK! GO AHEAD!" << RESET << std::endl;
-                std::this_thread::sleep_for(std::chrono::milliseconds(1500));
-            }
-            if(player[0]->getHitsCounter() == maxHits)
-                humansFlag = false;
-        } else {
-            humansFlag = false;
-        }
-        std::system("clear");
-    } while (humansFlag);
-    
-    do {
-        player[0]->board[0]->displayShipsOnBoard();
-        player[1]->board[0]->displayShotsOnBoard();
+void Game::winner(std::string winner) {
+    std::cout << "The winner is: " << GREEN << winner << RESET << "!\n";
+    system("read -p \"Press any key to continue...\" -n 1 -s");
+}
 
-        AIsShot = player[1]->takeShot();
-        player[0]->board[0]->takeAShotOnBoard(AIsShot);
-        
-        if(player[0]->correctShot(AIsShot)) {
-            std::cout << RED << "AI HIT YOUR SHIP!" << RESET << std::endl;
-            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-            AIsFlag = true;
-            player[1]->hitsIncrement();
-            hitShip = player[0]->board[0]->getShip(AIsShot);
-            if(player[0]->isSunken(hitShip, AIsShot)) {
-                std::cout << RED << "AI HAS SUNKEN YOUR SHIP!" << RESET << std::endl;
-                std::this_thread::sleep_for(std::chrono::milliseconds(1500));
-            }
-            Point AIsCorrectShot = AIsShot;
-            AIsShot = player[1]->shotPointsGenerator_ifWasHit(AIsCorrectShot);
-            AIsFlag = player[0]->correctShot(AIsShot);
-            player[0]->board[0]->takeAShotOnBoard(AIsShot);
-            if(player[1]->getHitsCounter() == maxHits)
-                AIsFlag = false;
-        }
-        std::system("clear");
-    } while (AIsFlag);
-    
-}
-void Game::winner() {
-    if(player_0_hits > player_1_hits)
-        std::cout << GREEN << "Congratulations, " << player[0]->getName() <<"!" << RESET << " You won the battleship!\n";
-    else
-        std::cout << RED << "Game Over, " << player[1]->getName() << RESET << " won this time. Try again\n";
-}
 void Game::run() {
     menu();
 }
+
 void Game::menu() {
     MenuOptions choice;
     
-    std::cout   << "\nMENU: "
-                << "\n1. ABOUT GAME"
-                << "\n2. GAME RULES"
-                << "\n3. START GAME"
-                << "\n4. EXIT"
-                << "\n~/ ";
+    std::cout   << "\n\tMENU: "
+                << "\n\t1. ABOUT GAME"
+                << "\n\t2. GAME RULES"
+                << "\n\t3. START GAME"
+                << "\n\t4. EXIT"
+                << "\n"
+                << RED << ">" << YELLOW << ">" << GREEN << "> " << RESET;
     choice = choose();
     
     switch (choice) {
@@ -146,16 +93,7 @@ void Game::menu() {
             break;
         }
         case playGame: {
-            startGame();
-            setShips();
-            int maxHits = Player::maxHits / 2;
-            do {
-//                startShooting();
-                playerMoves(player[0], player[1]);
-                player_0_hits = player[0]->getHitsCounter();
-                player_1_hits = player[1]->getHitsCounter();
-            } while(player_0_hits < maxHits && player_1_hits < maxHits);
-            winner();
+            gameLoop();
             menu();
             break;
         }
@@ -167,24 +105,66 @@ void Game::menu() {
     }
     
 }
-void Game::playerMoves(Player *&movingPLayer, Player *&enemy) {
+void Game::gameLoop() {
+    startGame();
+    setShips();
+    
+    Board *enemyBoard = player[1]->getBoard();
+    while (gameState != FINISHED) {
+        if (!playerMoves(player[0], player[1])) {
+            enemyBoard = player[0]->getBoard();
+            playerMoves(player[1], player[0]);
+        }
+    }
+    printPlayerBoard(player[0], player[1]);
+    winner(whoWon);
+}
+bool Game::playerMoves(Player *&movingPLayer, Player *&enemy) {
     Point shot;
     Ship *hitShip = nullptr;
+    Board *enemyBoard = enemy->getBoard();
+    static const int maxHits = Player::getMaxHits()/2;
     
-    movingPLayer->board[0]->displayShipsOnBoard();
-    enemy->board[0]->displayShotsOnBoard();
+    printPlayerBoard(movingPLayer, enemy);
     
     shot = movingPLayer->takeShot();
-    enemy->board[0]->takeAShotOnBoard(shot);
+    enemyBoard->takeAShotOnBoard(shot);
     
     if (enemy->correctShot(shot)) {
         movingPLayer->hitsIncrement();
-        hitShip = enemy->board[0]->getShip(shot);
-        if (enemy->isSunken(hitShip, shot)) {
-            std::cout << RED << "SHIP SUNKEN!" << RESET << std::endl;
+        printMonit(movingPLayer, "SHIP HIT");
+        std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+        hitShip = enemyBoard->getShip(shot);
+    
+        if (enemyBoard->isSunken(hitShip, shot)) {
+            printMonit(movingPLayer, "SUNKEN SHIP");
+            std::this_thread::sleep_for(std::chrono::milliseconds(1500));
+            if (movingPLayer->getHitsCounter() == maxHits) {
+                gameState = FINISHED;
+                whoWon = movingPLayer->getName();
+                return true;
+            }
         }
+        return playerMoves(movingPLayer, enemy);
     }
-    system("clear");
+    return false;
+}
+
+void Game::printPlayerBoard(Player *&movingPlayer, Player *&enemyBoard) {
+    if (movingPlayer->getShowOutput()) {
+        system("clear");
+        printMonit(movingPlayer, "YOUR'S BOARD:");
+        movingPlayer->drawPlayerBoard(true);
+        printMonit(movingPlayer, "ENEMY'S BOARD:");
+        enemyBoard->drawPlayerBoard(false);
+    }
+}
+void Game::printMonit(Player *&player, std::string monit) {
+    if (player->getShowOutput()) {
+        std::cout << GREEN << monit << RESET << std::endl;
+    } else {
+        std::cout << RED << monit << RESET << std::endl;
+    }
 }
 
 void Game::readFromFile(std::string fileName) {
@@ -197,14 +177,21 @@ void Game::readFromFile(std::string fileName) {
         std::cout << "Cannot open file" << std::endl;
         return;
     }
+    for (int i=0;i<200;++i) std::cout <<"-";
+    std::cout << std::endl;
+    
     while(!file.eof()) {
         std::getline(file,text);
         std::cout << text << std::endl;
     }
+    
+    for (int i=0;i<200;++i) std::cout <<"-";
+    std::cout << std::endl;
+    
     file.close();
 }
 void Game::finish() {
-    std::cout << "  Thanks for playing!\n\n";
+    std::cout << "\n\n\n  Thanks for playing!\n\n";
     std::cout << "  Created by Bartłomiej Smuga\n  MIT License\n  Copyright © 2018 Bartłomiej Smuga.\n\n";
 }
 #endif /* Game_hpp */

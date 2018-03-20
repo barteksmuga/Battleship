@@ -29,6 +29,8 @@ public:
     int getHitsCounter() {return hitsCounter;}
     bool checkShipPosition(Ship*&);
     virtual std::string getName(){return name;};
+    virtual void drawPlayerBoard(bool);
+    virtual Board *getBoard();
 private:
     Point shotPointsGenerator_ifWasHit(Point&);
     std::string name;
@@ -38,14 +40,19 @@ PlayerHuman::PlayerHuman() : Player(), hitsCounter(0) {
     std::cout << "Insert your name: ";
     std::cin >> name;
     std::cout << "Hello " << name << ", let's play a battleship!\n";
+    showOutput = true;
 }
 PlayerHuman::~PlayerHuman(){}
+
+Board* PlayerHuman::getBoard() {
+    return board[0];
+}
 
 void PlayerHuman::createShips(){
     Point point;
     Direction direct;
     for(int i=0; i<ONE_MASTED_SHIPS; i++){
-            board[0]->displayShipsOnBoard();
+            board[0]->drawBoard(true);
             point = createStart();
             oneMastedShips[i]->setStart(point);
             std::system("clear");
@@ -53,7 +60,7 @@ void PlayerHuman::createShips(){
     }
     for(int i=0; i<TWO_MASTED_SHIPS; i++){
         do{
-            board[0]->displayShipsOnBoard();
+            board[0]->drawBoard(true);
             point = createStart();
             twoMastedShips[i]->setStart(point);
             direct = createDirection();
@@ -64,7 +71,7 @@ void PlayerHuman::createShips(){
     }
     for(int i=0; i<THREE_MASTED_SHIPS; i++){
         do{
-            board[0]->displayShipsOnBoard();
+            board[0]->drawBoard(true);
             point = createStart();
             threeMastedShips[i]->setStart(point);
             direct = createDirection();
@@ -75,7 +82,7 @@ void PlayerHuman::createShips(){
     }
     for(int i=0; i<FOUR_MASTED_SHIPS; i++){
         do{
-            board[0]->displayShipsOnBoard();
+            board[0]->drawBoard(true);
             point = createStart();
             fourMastedShips[i]->setStart(point);
             direct = createDirection();
@@ -85,7 +92,7 @@ void PlayerHuman::createShips(){
         board[0]->setShipOnBoard(fourMastedShips[i]);
     }
     
-    board[0]->displayShipsOnBoard();
+    board[0]->drawBoard(true);
 }
 Point PlayerHuman::takeShot(){
     Point shot;
@@ -154,4 +161,7 @@ Point PlayerHuman::shotPointsGenerator_ifWasHit(Point &point){
     return Point(0,0);
 }
 
+void PlayerHuman::drawPlayerBoard(bool isOwn) {
+    board[0]->drawBoard(isOwn);
+}
 #endif /* PlayerHuman_hpp */
